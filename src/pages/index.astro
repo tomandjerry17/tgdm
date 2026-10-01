@@ -1,19 +1,165 @@
+```astro
 ---
 import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const projects = await getCollection("projects");
+const certificates = await getCollection("certificates");
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1 class="text-3xl font-bold text-blue-600">
-			Astro + Tailwind
-		</h1>
-	</body>
-</html>
+<BaseLayout>
+	<main class="mx-auto max-w-5xl px-6 py-16">
+		<!-- Hero -->
+		<section class="mb-16">
+			<p class="mb-3 text-sm font-semibold uppercase tracking-wider text-blue-600">
+				Full-stack developer · Cybersecurity
+			</p>
+
+			<h1 class="text-4xl font-bold tracking-tight sm:text-5xl">
+				Full-stack developer with a security background
+			</h1>
+
+			<div class="mt-6 max-w-3xl space-y-4 text-lg leading-8 text-gray-600">
+				<p>
+					I’m a full-stack developer with a background in cybersecurity,
+					focused on building reliable, secure, and user-friendly web
+					applications.
+				</p>
+
+				<p>
+					I enjoy working across the stack, from designing interfaces
+					and APIs to thinking about security, performance, and
+					maintainability.
+				</p>
+			</div>
+
+			<!-- Social Links -->
+			<div class="mt-8 flex flex-wrap gap-4">
+				<a
+					href="https://github.com/tomandjerry17"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="rounded-lg bg-gray-900 px-5 py-3 font-medium text-white transition hover:bg-gray-700"
+				>
+					GitHub
+				</a>
+
+				<a
+					href="https://www.linkedin.com/in/martinez-thomas-gabriel-d-martinez-107a09355/"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="rounded-lg border border-gray-300 px-5 py-3 font-medium transition hover:bg-gray-100"
+				>
+					LinkedIn
+				</a>
+			</div>
+		</section>
+
+		<!-- Projects -->
+		<section class="mb-16">
+			<div class="mb-6">
+				<p class="text-sm font-semibold uppercase tracking-wider text-blue-600">
+					Featured work
+				</p>
+
+				<h2 class="mt-1 text-3xl font-bold">
+					Projects
+				</h2>
+			</div>
+
+			<div class="grid gap-6 md:grid-cols-2">
+				{projects.map((project) => (
+					<article class="rounded-xl border border-gray-200 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+						<h3 class="text-xl font-semibold">
+							{project.data.title}
+						</h3>
+
+						<p class="mt-3 leading-7 text-gray-600">
+							{project.data.summary}
+						</p>
+
+						{project.data.techStack.length > 0 && (
+							<div class="mt-5 flex flex-wrap gap-2">
+								{project.data.techStack.map((tech) => (
+									<span class="rounded-full bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
+										{tech}
+									</span>
+								))}
+							</div>
+						)}
+
+						<div class="mt-6 flex gap-4">
+							{project.data.liveUrl && (
+								<a
+									href={project.data.liveUrl}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="font-medium text-blue-600 hover:underline"
+								>
+									Live Demo →
+								</a>
+							)}
+
+							{project.data.repoUrl && (
+								<a
+									href={project.data.repoUrl}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="font-medium text-gray-700 hover:underline"
+								>
+									Source Code →
+								</a>
+							)}
+						</div>
+					</article>
+				))}
+			</div>
+		</section>
+
+		<!-- Certificates -->
+		<section>
+			<div class="mb-6">
+				<p class="text-sm font-semibold uppercase tracking-wider text-blue-600">
+					Professional development
+				</p>
+
+				<h2 class="mt-1 text-3xl font-bold">
+					Certificates
+				</h2>
+			</div>
+
+			<div class="grid gap-6 md:grid-cols-2">
+				{certificates.map((certificate) => (
+					<article class="rounded-xl border border-gray-200 p-6 shadow-sm">
+						<h3 class="text-xl font-semibold">
+							{certificate.data.title}
+						</h3>
+
+						<p class="mt-2 font-medium text-gray-700">
+							{certificate.data.issuer}
+						</p>
+
+						<div class="mt-3 flex flex-wrap gap-3 text-sm text-gray-500">
+							<span>{certificate.data.category}</span>
+							<span>•</span>
+							<span>{certificate.data.date}</span>
+						</div>
+
+						{certificate.data.verificationUrl && (
+							<a
+								href={certificate.data.verificationUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="mt-5 inline-block font-medium text-blue-600 hover:underline"
+							>
+								Verify Certificate →
+							</a>
+						)}
+					</article>
+				))}
+			</div>
+		</section>
+	</main>
+</BaseLayout>
+```
