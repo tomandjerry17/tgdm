@@ -1,5 +1,17 @@
 ---
 import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Thomas Martinez | Full-stack developer",
+  description = "Full-stack developer with a security background.",
+} = Astro.props;
+
+const pathname = Astro.url.pathname;
 ---
 
 <html lang="en">
@@ -7,23 +19,23 @@ import "../styles/global.css";
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content="Portfolio site of Thomas" />
-    <title>Thomas' Portfolio</title>
+    <meta name="description" content={description} />
+    <title>{title}</title>
   </head>
   <body class="font-sans">
     <!-- Header -->
     <header class="p-4 bg-gray-100 shadow">
       <nav class="flex gap-4">
-        <a href="/" class="text-blue-600 font-bold">Home</a>
-        <a href="/projects" class="text-gray-700">Projects</a>
-        <a href="/certificates" class="text-gray-700">Certificates</a>
-        <a href="/contact" class="text-gray-700">Contact</a>
+        <a href="/" class:list={["text-gray-700", { "font-bold text-blue-600": pathname === "/" }]}>Home</a>
+        <a href="/projects" class:list={["text-gray-700", { "font-bold text-blue-600": pathname.startsWith("/projects") }]}>Projects</a>
+        <a href="/certificates" class:list={["text-gray-700", { "font-bold text-blue-600": pathname.startsWith("/certificates") }]}>Certificates</a>
+        <a href="/contact" class:list={["text-gray-700", { "font-bold text-blue-600": pathname.startsWith("/contact") }]}>Contact</a>
       </nav>
     </header>
 
     <!-- Page content -->
-    <main class="p-6">
-      <slot />
+    <main class="mx-auto max-w-5xl px-6 py-16">
+        <slot />
     </main>
 
     <!-- Footer -->

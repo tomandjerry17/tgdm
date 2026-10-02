@@ -24,7 +24,7 @@ const certificates = defineCollection({
   schema: z.object({
     title: z.string(),
     issuer: z.string(),
-    date: z.string(),
+    date: z.coerce.date(),
     category: z.string(),
     verificationUrl: z.string().url().optional(),
   }),
