@@ -1,0 +1,15 @@
+---
+import { getCollection } from "astro:content";
+import Section from "./Section.astro";
+import ProjectCard from "./ProjectCard.astro";
+
+const projects = (
+  await getCollection("projects", ({ data }) => data.featured)
+).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Section id="projects" eyebrow="Selected work" title="Projects">
+  <div class="space-y-6">
+    {projects.map((project) => <ProjectCard project={project} />)}
+  </div>
+</Section>

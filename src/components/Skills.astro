@@ -1,0 +1,47 @@
+---
+import Section from "./Section.astro";
+
+const groups = [
+  {
+    label: "Core development",
+    items: [
+      "React", "Node.js", "Express", "TypeScript", "PostgreSQL", "Prisma",
+      "Supabase", "Socket.io", "Tailwind CSS", "Git and GitHub",
+    ],
+  },
+  {
+    label: "Security",
+    items: [
+      "SOC Tier 1 triage", "Case documentation", "Microsoft 365 / Azure AD",
+      "AWS CloudTrail", "CrowdStrike", "SentinelOne", "Fortinet",
+      "Splunk (Cisco pathway)",
+    ],
+  },
+  {
+    label: "Also",
+    items: [
+      "Python", "TensorFlow / Keras", "Streamlit", "Google Colab",
+      "Test case writing",
+    ],
+  },
+];
+---
+
+<Section id="skills" eyebrow="Toolkit" title="Skills">
+  <div class="space-y-6">
+    {
+      groups.map((group) => (
+        <div class="grid gap-2 sm:grid-cols-[10rem_1fr] sm:gap-6">
+          <p class="text-sm font-medium text-gray-500">{group.label}</p>
+          <ul class="flex flex-wrap gap-2">
+            {group.items.map((item) => (
+              <li class="rounded border border-gray-200 px-2 py-1 text-sm text-gray-700">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</Section>

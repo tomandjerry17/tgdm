@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { site } from "../data/site";
 
 interface Props {
   title?: string;
@@ -7,40 +8,42 @@ interface Props {
 }
 
 const {
-  title = "Thomas Martinez | Full-stack developer",
-  description = "Full-stack developer with a security background.",
+  title = `${site.name} | Full-stack developer`,
+  description = "Full-stack developer with a security background. Open to new opportunities.",
 } = Astro.props;
-
-const pathname = Astro.url.pathname;
 ---
 
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>
-  <body class="font-sans">
-    <!-- Header -->
-    <header class="p-4 bg-gray-100 shadow">
-      <nav class="flex gap-4">
-        <a href="/" class:list={["text-gray-700", { "font-bold text-blue-600": pathname === "/" }]}>Home</a>
-        <a href="/projects" class:list={["text-gray-700", { "font-bold text-blue-600": pathname.startsWith("/projects") }]}>Projects</a>
-        <a href="/certificates" class:list={["text-gray-700", { "font-bold text-blue-600": pathname.startsWith("/certificates") }]}>Certificates</a>
-        <a href="/contact" class:list={["text-gray-700", { "font-bold text-blue-600": pathname.startsWith("/contact") }]}>Contact</a>
+  <body class="bg-white font-sans text-gray-900 antialiased">
+    <header class="sticky top-0 z-10 border-b border-gray-200 bg-white/80 backdrop-blur">
+      <nav class="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
+        <a href="#" class="font-semibold">{site.name}</a>
+        <ul class="flex gap-4 text-sm text-gray-600 sm:gap-6">
+          <li><a href="#experience" class="hover:text-gray-900">Experience</a></li>
+          <li><a href="#projects" class="hover:text-gray-900">Projects</a></li>
+          <li><a href="#certificates" class="hover:text-gray-900">Certificates</a></li>
+          <li><a href="#contact" class="hover:text-gray-900">Contact</a></li>
+        </ul>
       </nav>
     </header>
 
-    <!-- Page content -->
-    <main class="mx-auto max-w-5xl px-6 py-16">
-        <slot />
+    <main class="mx-auto max-w-4xl px-6">
+      <slot />
     </main>
 
-    <!-- Footer -->
-    <footer class="p-4 bg-gray-100 text-center text-sm text-gray-500">
-      © {new Date().getFullYear()} Thomas. All rights reserved.
+    <footer class="mt-16 border-t border-gray-200 py-8 text-center text-sm text-gray-500">
+      © {new Date().getFullYear()} {site.name}
     </footer>
   </body>
 </html>

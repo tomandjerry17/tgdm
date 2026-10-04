@@ -1,0 +1,21 @@
+---
+import Section from "./Section.astro";
+
+const highlights = [
+  "Investigated and documented security alerts as a Tier 1 analyst across Microsoft 365 / Azure AD, AWS CloudTrail, CrowdStrike, SentinelOne, and Fortinet environments.",
+  "Wrote structured, evidence-based case notes with clear escalation recommendations for Tier 2 review.",
+  "Completed 240 hours in the Cyber Security Operations Division.",
+];
+---
+
+<Section id="experience" eyebrow="Background" title="Experience">
+  <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+    <h3 class="text-lg font-semibold">Cyber Security Analyst Intern (SOC Tier 1)</h3>
+    <p class="text-sm text-gray-500">Jun 10 to Jul 27, 2026 · 240 hours</p>
+  </div>
+  <p class="mt-1 text-gray-600">CyTech Development and Operations, Inc.</p>
+
+  <ul class="mt-4 list-disc space-y-2 pl-5 text-gray-600">
+    {highlights.map((item) => <li>{item}</li>)}
+  </ul>
+</Section>

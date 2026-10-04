@@ -1,0 +1,36 @@
+---
+import { site } from "../data/site";
+import Section from "./Section.astro";
+---
+
+<Section id="contact" eyebrow="Say hello" title="Get in touch">
+  <p class="max-w-xl leading-7 text-gray-600">
+    I'm open to full-stack and security-focused roles, remote or on-site, where
+    I can build secure, reliable products. Email is the fastest way to reach me.
+  </p>
+
+  <div class="mt-6 flex flex-wrap gap-3">
+    <a
+      href={`mailto:${site.email}`}
+      class="rounded-md bg-gray-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-gray-700"
+    >
+      {site.email}
+    </a>
+    <a
+      href={site.github}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="rounded-md border border-gray-300 px-5 py-2.5 text-sm font-medium transition hover:bg-gray-100"
+    >
+      GitHub
+    </a>
+    <a
+      href={site.linkedin}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="rounded-md border border-gray-300 px-5 py-2.5 text-sm font-medium transition hover:bg-gray-100"
+    >
+      LinkedIn
+    </a>
+  </div>
+</Section>

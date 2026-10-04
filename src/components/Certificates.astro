@@ -1,0 +1,46 @@
+---
+import { getCollection } from "astro:content";
+import Section from "./Section.astro";
+
+const certificates = (await getCollection("certificates")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString("en-US", {
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+---
+
+<Section id="certificates" eyebrow="Credentials" title="Certificates">
+  <ul class="divide-y divide-gray-200 border-y border-gray-200">
+    {
+      certificates.map(({ data }) => (
+        <li class="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between">
+          <div>
+            <p class="font-medium">
+              {data.verificationUrl ? (
+                <a
+                  href={data.verificationUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:underline"
+                >
+                  {data.title}
+                </a>
+              ) : (
+                data.title
+              )}
+            </p>
+            <p class="text-sm text-gray-600">{data.issuer}</p>
+          </div>
+          <p class="text-sm text-gray-500">
+            {data.category} · {formatDate(data.date)}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

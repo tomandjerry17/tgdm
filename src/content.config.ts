@@ -9,10 +9,14 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     summary: z.string(),
+    role: z.string(),
+    highlights: z.array(z.string()).default([]),
     techStack: z.array(z.string()),
+    image: z.string().optional(),
     liveUrl: z.string().url().optional(),
     repoUrl: z.string().url().optional(),
     featured: z.boolean().default(false),
+    order: z.number().default(99),
   }),
 });
 
