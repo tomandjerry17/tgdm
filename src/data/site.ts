@@ -4,6 +4,6 @@ export const site = {
   email: "thomasgabrielmartinez@gmail.com",
   github: "https://github.com/tomandjerry17",
   linkedin:
-    "https://www.linkedin.com/in/martinez-thomas-gabriel-d-martinez-107a09355/",
+    "https://www.linkedin.com/in/tgdm17/",
   resume: "/resume.pdf",
 };
